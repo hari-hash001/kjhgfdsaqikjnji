@@ -1,0 +1,39 @@
+.parentDiv {
+    display: flex;
+    flex-direction: row; /* Change to column layout */
+}
+ 
+.cobProgressChart {
+    border: 0.12rem solid blueviolet;
+    border-radius: 1rem;
+    text-align: left;
+    padding: 1rem 1rem;
+    margin: 0;
+    top: 0;
+    z-index: 3;
+    width: 55%;
+
+    
+}
+ 
+.header2 {
+    font-size: 1.35rem;
+    font-weight: normal;
+    margin: 1rem 0.5rem;
+}
+ 
+.cobRunningBatch {
+    flex-grow: 1;
+    padding: 1rem;
+    margin-left: 2rem;
+    margin-top: 0.3rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+    max-height: 100vh; /* Maximum height for the component */
+
+  }
+
+
+  .chart{
+    margin-left: -3rem;
+  }

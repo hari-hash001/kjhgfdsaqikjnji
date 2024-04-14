@@ -1,0 +1,159 @@
+.parent{
+  display: flex;
+  margin-top:-2.4rem;
+
+  
+}
+
+.cobStage{
+
+  width:65%;
+ 
+  border: 0.12rem solid blueviolet;
+  border-radius: 1rem;
+  width: 60%;
+  table-layout: fixed;
+height: 27rem;
+
+}
+
+
+
+
+
+.cell {
+  flex: 1;
+  padding:0.5rem;
+  padding-left: 1rem;
+  height: 2rem;
+}
+
+.cell:last-child {
+  border-right: none;
+}
+
+
+
+
+  .processed{
+    flex: 1;
+  padding:0.5rem;
+  padding-left: -3rem;
+  height: 2rem;
+  margin-right: 1rem;
+  margin-left: 14rem;
+  }
+
+
+
+  .progressBar{
+    flex: 1;
+    padding:0.5rem;
+    padding-left: 3rem;
+  margin-left: 1rem;
+  right: 500px;
+  padding-left: 0 !important;
+
+  }
+
+
+  .row{
+    width: 95%;
+  }
+
+
+  .completionTime{
+    display: block;
+    margin-top: 3rem;
+    width: 30%;
+    margin-left: 0.7rem;
+    
+  }
+
+  .first{
+    border: 0.12rem solid blueviolet;
+    height: 45%;
+    border-radius: 0.7rem;
+    
+  }
+
+  .second{
+    margin-top: 0.25rem;
+    border: 0.12rem solid blueviolet;
+    height: 45%;
+    border-radius: 1rem;
+
+
+  }
+
+
+  .cobClock{
+    margin-top: -1rem;
+    height: 80%;
+    overflow: auto; 
+
+  }
+
+
+
+  .cob-running-batch-table{
+    overflow-x: hidden;
+  }
+  
+
+  .table{
+    margin-left: -10rem;
+  }
+
+
+
+
+.cobruntimeheader{
+margin: 1rem 1rem;
+}
+
+
+.stage td{
+width: 12%;
+}
+
+
+.stagerow{
+margin-left: -100rem;
+padding-left: -100rem;
+}
+
+
+
+.progressHead {
+padding-left: 0 !important;
+}
+
+.progressBar {
+margin-left: -1rem;
+}
+
+
+th.progressHead,
+td.progressBar {
+padding-left: 0 !important;
+}
+
+
+th.processedHead{
+margin-left: 20rem;
+padding-left: 20rem;
+border-left: 10rem;
+}
+
+
+
+.headerrun{
+  position: sticky;
+  margin-bottom: 10rem;
+  width: 15%;
+  margin-top: -10rem;
+  margin-left: 2rem;
+}
+
+

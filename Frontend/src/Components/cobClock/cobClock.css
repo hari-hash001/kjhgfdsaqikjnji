@@ -1,0 +1,42 @@
+.clock {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.clockContainer {
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clockContainer h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.restart,
+.stop {
+  margin: 0.5rem 0.5rem;
+  padding: 1rem 1rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 1rem;
+  background-color: #00008b; /* Change button color */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.restart:hover,
+.stop:hover {
+  background-color: #ffffff; /* Darken button color on hover */
+  color: #00008b;
+}

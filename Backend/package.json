@@ -1,0 +1,22 @@
+{
+  "name": "cob-mail-api",
+  "version": "1.0.0",
+  "description": "used to send the mail to the user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Subbiah",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13",
+    "nodemon": "^3.1.0"
+  }
+}

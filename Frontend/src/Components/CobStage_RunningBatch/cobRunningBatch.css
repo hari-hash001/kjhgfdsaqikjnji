@@ -1,0 +1,122 @@
+/* 
+.cobRunningBatch{
+        
+    padding: 1rem; 
+    border: 0.18rem solid blueviolet;
+    margin-left: 3rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    width: 90%;
+    scrollbar-width: none;
+
+    margin-left: 1rem;
+    border: 2rem solid blueviolet;
+  
+}
+
+
+
+  
+  .ibgBY{
+    overflow-x: hidden;
+  }
+
+  .header1 {
+    padding: -3rem 1rem;
+    font-size: 1.35rem;
+    font-weight: bold;
+    margin: 1rem 0.5rem; 
+    margin-top: -15rem;
+}
+
+
+
+.cob-running-batch-table .rdt_TableCol {
+  max-width: none !important;
+}
+
+.cob-running-batch-table {
+  white-space: normal !important;
+  overflow-x: hidden !important
+}
+
+
+
+
+
+
+
+.cobRunningBatch{
+padding: 1rem; 
+border: 0.12rem solid blueviolet;
+margin-left: 1rem;
+margin-top: 2rem;
+border-radius: 1rem;
+width: 40%;
+scrollbar-width: none;
+margin-top: 0.7rem;
+}
+
+
+
+
+.ibgBY{
+overflow-x: hidden;
+}
+
+.header1 {
+padding: -3rem 1rem;
+font-size: 1.35rem;
+font-weight: bold;
+margin: 1rem 0.5rem; 
+margin-top: -15rem;
+}
+
+
+
+.cob-running-batch-table .rdt_TableCol {
+max-width: none !important;
+}
+
+.cob-running-batch-table {
+white-space: normal !important;
+overflow-x: hidden !important;
+}
+
+
+
+
+.barchart{
+  margin-top: 1rem;
+} */
+
+
+
+.cobRunningBatch {
+  padding: 1rem;
+  border: 0.12rem solid blueviolet;
+  border-radius: 1rem;
+  width: 50%;
+  max-height: 100vh; /* Maximum height for the component */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  margin-left: 1rem; /* Adjust margin as needed */
+  margin-top: 2rem;
+}
+
+.cobRunningBatch .cob-running-batch-table {
+  white-space: nowrap; /* Prevent text wrapping in table cells */
+}
+
+.cobRunningBatch .cob-running-batch-table .rdt_TableCol {
+  max-width: none !important; /* Override max-width for table columns */
+}
+
+.header {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.barchart {
+  margin-top: 1rem;
+}
