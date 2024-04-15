@@ -161,12 +161,26 @@
 
 import React, { useState, useEffect } from 'react';
 import DisplayPausedTime from './DisplayPausedTime';
+ import './Timer.css';
+ import { useSelector, useDispatch } from 'react-redux';
+ import ButtonClicked, { click } from '../store/ButtonClicked'; // Import the reducer
+import { store } from '../store/store';
  
 const Timer = ({ shouldStartTimer }) => {
   const [startTime, setStartTime] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
- 
+  const isClicked = useSelector((state) =>(state.buttonClicked.isClicked));
+
+  const selectCounterValue = state => state.buttonClicked.isClicked;
+  const currentValue = selectCounterValue(store.getState());
+  // console.log("currentValue: "+currentValue);
+
+  // const isClicked1 = useSelector((state) => );
+
+  // useEffect(() => {
+  //   // console.log("isClicked from Timer state:", isClicked);
+  // }, [isClicked]);
   // Load start time from localStorage on component mount
   useEffect(() => {
     const storedStartTime = localStorage.getItem('startTime');
@@ -176,7 +190,7 @@ const Timer = ({ shouldStartTimer }) => {
       setElapsedTime(storedElapsedTime);
       setIsRunning(true); // Start the timer if it was running before
     }
-  }, []);
+  }, [isClicked]);
  
   useEffect(() => {
     let intervalId;
@@ -217,13 +231,22 @@ const Timer = ({ shouldStartTimer }) => {
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
  
+
   const handleStartStop = () => {
-    setIsRunning(prevIsRunning => !prevIsRunning);
-    if (!isRunning) {
-      const now = Date.now();
-      localStorage.setItem('startTime', now.toString()); // Store the current time as start time
-      setStartTime(now);
+    alert("sdfjknasdf")
+    console.log("Inside Handle...");
+    if(currentValue===1){
+      alert("asdfsdf");
+      console.log("EFG...");
+      // setIsRunning(prevIsRunning => !prevIsRunning);
+      // if (!isRunning) {
+        console.log("ABC...");
+        const now = Date.now();
+        localStorage.setItem('startTime', now.toString()); // Store the current time as start time
+        setStartTime(now);
+      // }
     }
+   
   };
  
   const handleReset = () => {
@@ -235,12 +258,14 @@ const Timer = ({ shouldStartTimer }) => {
   };
  
   return (
-    <div>
-      <h2>Timer</h2>
-      <div>{formatTime(elapsedTime)}</div>
-      <button onClick={handleStartStop}>{isRunning ? 'Stop' :'.'}</button>
-      <button onClick={handleReset}>Reset</button>
-      <DisplayPausedTime shouldStartTimer={shouldStartTimer} />
+    <div className="clockContainer">
+      <div className="clock">{formatTime(elapsedTime)}</div>
+      {/* <button className="start" onClick={handleStartStop}>start</button> */}
+      <button onClick={handleStartStop}>{isRunning ? 'Stop' : 'Start'}</button>
+
+      <button className="restart" onClick={handleReset}>Reset</button>
+
+      {/* <DisplayPausedTime shouldStartTimer={shouldStartTimer} /> */}
     </div>
   );
 };

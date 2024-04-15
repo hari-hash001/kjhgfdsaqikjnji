@@ -293,7 +293,7 @@ console.log(myArr[2]);
 let bankName=myArr[2];
 console.log(typeof bankName);
 
-function Table() {
+function Table({ shouldStartTimer }) {
  
   
   const value=useContext(Context);
@@ -439,13 +439,14 @@ const [timerRunning, setTimerRunning] = useState(false);
         <div className="first">
           <h6 className='cobruntimeheader'>COB Run Time</h6>
           <div className='cobClock'>
-          <Timer shouldStartTimer={timerRunning} /> 
+          <Timer shouldStartTimer={timerRunning} onStart={onStart}/> 
           </div>
           <div></div>
         </div>
         <div className="second">
           <h6 className='cobruntimeheader'>Expected Completion Time</h6>
-          <DisplayPausedTime/>
+          {/* <DisplayPausedTime/> */}
+          <DisplayPausedTime shouldStartTimer={shouldStartTimer} />
 
         </div>
       </div>

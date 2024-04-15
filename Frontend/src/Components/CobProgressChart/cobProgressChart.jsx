@@ -151,7 +151,7 @@ const CobProgressChart = () => {
           throw new Error('Failed to fetch data');
         }
         const jsonData = await response.json();
-        console.log("JSON DATA: "+JSON.stringify(jsonData)); // Check if JSON data is received correctly
+        // console.log("JSON DATA: "+JSON.stringify(jsonData)); // Check if JSON data is received correctly
  
         // const extractedData = jsonData.body.map(item => ({
         //   name: item.Service, // Use service data directly as names

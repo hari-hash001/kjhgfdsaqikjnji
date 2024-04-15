@@ -80,13 +80,9 @@ function App() {
     <Router>
       <div className="App">
         <Navbar setSelectedCOB={setSelectedCOB} onStart={onStart} /> 
-        {/* <Navbar onStart={onStart} /> */}
       <Timer shouldStartTimer={timerRunning} /> 
     
-        {/* <CobProgressChart/>
-        <Table/>
-        <Timer/> */}
-        {/* <DisplayPausedTime/> */}
+      
            
         <Routes>
           <Route path="/" element={<HamburgerMenu />} />

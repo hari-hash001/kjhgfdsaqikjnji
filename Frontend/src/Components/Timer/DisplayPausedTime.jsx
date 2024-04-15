@@ -54,6 +54,8 @@
 
 
 import React from 'react';
+import './Timer.css';
+
  
 const DisplayPausedTime = () => {
   // Retrieve paused time from localStorage
@@ -69,10 +71,11 @@ const DisplayPausedTime = () => {
   };
  
   return (
-    <div className='expectedTimer'>
-      <h2>Paused Time</h2>
-      <div>{pausedTime ? `Paused Time: ${formatTime(parseInt(pausedTime))}` : 'No paused time recorded'}</div>
-    </div>
+    <div className='clockContainer'> {/* Apply the same CSS class */}
+    {/* <div className="clock">{pausedTime ? `Paused Time: ${formatTime(parseInt(pausedTime))}` : 'No paused time recorded'}</div> */}
+    <div className="clock">{pausedTime ? `${formatTime(parseInt(pausedTime))}` : 'No paused time recorded'}</div>
+
+  </div>
   );
 };
  

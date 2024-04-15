@@ -14,7 +14,7 @@ const CobRunningBatch = ({ batchName }) => {
       try {
         const response = await fetch('http://127.0.0.1:81/fundsTransferContainer/api/v1.0.0/party/runningbatch?page_size=1000');
         const result = await response.json();
-        console.log(result.body);
+        // console.log(result.body);
         setBatchData(result.body);
       } catch (error) {
         console.error('Error fetching data:', error);
