@@ -3,6 +3,7 @@
   text-align: center;
   height: 80%;
   overflow: hidden;
+  font-size: 2.5em;
 }
 
 .container {
@@ -15,10 +16,10 @@
 }
 
 .clockContainer {
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
   border-radius: 1rem;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   overflow: hidden; /* Disable scrolling */
 
 }
@@ -35,16 +36,14 @@
   font-size: 8px;
   border: none;
   border-radius: 1rem;
-  background-color: #00008b; /* Change button color */
-  color: white;
+  /* color: white; */
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .restart:hover,
 .stop:hover {
-  background-color: #ffffff; /* Darken button color on hover */
-  color: #00008b;
+  /* background-color: #ffffff; */
 }
 
 

@@ -53,13 +53,15 @@
 
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Timer.css';
 
  
 const DisplayPausedTime = () => {
-  // Retrieve paused time from localStorage
-  const pausedTime = localStorage.getItem('pausedTime');
+
+
+  const pausedTime = localStorage.getItem('PrevTimerValue');
+
  
   // Convert seconds into hours, minutes, and seconds
   const formatTime = (timeInSeconds) => {

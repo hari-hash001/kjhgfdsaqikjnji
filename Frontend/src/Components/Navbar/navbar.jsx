@@ -1,5 +1,3 @@
-
-
 import './navbar.css';
 import { Link } from "react-router-dom";
 import React, { useContext, useState} from "react";
@@ -10,7 +8,6 @@ import ButtonClicked, { click } from '../store/ButtonClicked'; // Import the red
  let timerFlag=0;
  
 const Navbar = ({onStart}) => {
-  // const isClicked = useSelector((state) => state.ButtonClicked.isClicked);
   const isClicked = useSelector((state) => console.log("from navbar state: "+(state.buttonClicked.isClicked)));
   // console.log(isClicked);
   const dispatch=useDispatch();
@@ -23,6 +20,9 @@ const Navbar = ({onStart}) => {
 
   //  console.log(value);
     const handleCOBStart = async () => {
+
+
+      localStorage.setItem("start",true);
       dispatch(click());
       onStart();
       setTimerFlag(1);

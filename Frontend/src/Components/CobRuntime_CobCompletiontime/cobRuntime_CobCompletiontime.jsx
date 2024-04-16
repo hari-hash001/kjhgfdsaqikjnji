@@ -238,7 +238,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import CobRunningBatch from '../CobStage_RunningBatch/cobRunningBatch';
 import Clocktest from '../cobClockTest/clockTest';
 import { Context } from "../../App";
-import Timer from '../Timer/Timer';
+import Timer from '../Timer/Timer1';
 import DisplayPausedTime from '../Timer/DisplayPausedTime';
 
  
@@ -446,7 +446,7 @@ const [timerRunning, setTimerRunning] = useState(false);
         <div className="second">
           <h6 className='cobruntimeheader'>Expected Completion Time</h6>
           {/* <DisplayPausedTime/> */}
-          <DisplayPausedTime shouldStartTimer={shouldStartTimer} />
+          {/* <DisplayPausedTime shouldStartTimer={shouldStartTimer} /> */}
 
         </div>
       </div>

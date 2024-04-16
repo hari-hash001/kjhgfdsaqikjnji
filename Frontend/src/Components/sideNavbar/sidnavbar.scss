@@ -1,0 +1,15 @@
+
+  .transition-transform {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  // Define the position when the sidebar is closed
+  .-translate-x-full {
+    transform: translateX(-100%);
+  }
+  svg{
+    color: #4A0575;
+  }
+  .navi{
+    max-width: 40px;
+  }

@@ -56,13 +56,11 @@ import Navbar from './Components/Navbar/navbar.jsx';
 import EodErrorPage from './Components/EodError/Eod.jsx';
 import HamburgerMenu from './Components/Navbar/hamburg.jsx';
 import DatePickerValidation from './Components/Shedule/shedule.jsx';
-import Table from './Components/CobRuntime_CobCompletiontime/cobRuntime_CobCompletiontime.jsx';
-import CobProgressChart from './Components/CobProgressChart/cobProgressChart.jsx';
-import Timer from './Components/Timer/Timer.jsx';
-import DisplayPausedTime from './Components/Timer/DisplayPausedTime.jsx';
-import CobRunningBatch from './Components/CobStage_RunningBatch/cobRunningBatch.jsx';
+
 import Smtp from './Components/SMTP/smtp.jsx';
-import Packer from './Components/packer/Packer.jsx';
+
+import Sidebar from './Components/sideNavbar/sidenav.jsx';
+import './App.scss'
 export const Context=createContext()//
 function App() {
   const [selectedCOB, setSelectedCOB] = useState('');//
@@ -78,20 +76,24 @@ function App() {
     <Context.Provider value={{ selectedCOB, setSelectedCOB, timerFlag, setTimerFlag }}>
 
     <Router>
-      <div className="App">
-        <Navbar setSelectedCOB={setSelectedCOB} onStart={onStart} /> 
-      <Timer shouldStartTimer={timerRunning} /> 
-    
+      <div className="wholepage">
       
-           
-        <Routes>
-          <Route path="/" element={<HamburgerMenu />} />
+        <Navbar setSelectedCOB={setSelectedCOB} onStart={onStart} />  
+        <div class="Split">
+          <div class="leftpane">
+          </div>
+          <div class="Rightpane">
+          <Routes>
           {/* <Route path="/home" element={<Packer/>} /> */}
           <Route path="/eod-error" element={<EodErrorPage />} />
           <Route path="/schedule" element={<DatePickerValidation />} />
           <Route path="/Smtp" element={<Smtp />} />
           {/* Packer */}
         </Routes>
+          </div>
+        </div>
+               
+        
       </div>
     </Router>
     </Context.Provider>
