@@ -76,25 +76,19 @@ function App() {
     <Context.Provider value={{ selectedCOB, setSelectedCOB, timerFlag, setTimerFlag }}>
 
     <Router>
-      <div className="wholepage">
       
         <Navbar setSelectedCOB={setSelectedCOB} onStart={onStart} />  
-        <div class="Split">
-          <div class="leftpane">
-          </div>
-          <div class="Rightpane">
+       
           <Routes>
-          {/* <Route path="/home" element={<Packer/>} /> */}
+          <Route path="/" element={<HamburgerMenu/>} />
           <Route path="/eod-error" element={<EodErrorPage />} />
           <Route path="/schedule" element={<DatePickerValidation />} />
           <Route path="/Smtp" element={<Smtp />} />
           {/* Packer */}
         </Routes>
-          </div>
-        </div>
+          
                
         
-      </div>
     </Router>
     </Context.Provider>
   );
