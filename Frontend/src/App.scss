@@ -2,17 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '/public/globalStyle.scss';
-
-.wholepage{
-  .Split{
-    display: flex;
-    .leftpane{
-      position: relative;
-      width: 10%;
-    }
-    .Rightpane{
-      
-      width: 90%;
-    }
-  }
+.content{
+    width: 100% !important;
+}
+.top-navbar{
+    background-color: $white-color;
 }

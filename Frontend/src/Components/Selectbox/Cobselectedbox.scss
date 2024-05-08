@@ -1,0 +1,10 @@
+@import "./public/globalStyle.scss";
+.selectBox
+{
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+  font-family: $font-family;
+  font-weight: 700;
+  border: 1px solid $primary-color;
+}

@@ -1,38 +1,92 @@
-// EodErrorPage.js
-
-// import React from 'react';
-
-// const EodErrorPage = () => {
-//   return (
-//     <div>
-//       <h2>EOD Error Page</h2>
-//       {/* Add your content here */}
-//     </div>
-//   );
-// };
-
-// export default EodErrorPage;
-
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import EodPopup from './popup';
 import './Eod.scss';
+import './eod.css';
+// import { TimerContext } from '../Timer/CobRunningTime.jsx';
 
-function EodErrorPage() {
+const EodErrorPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(5);
+  const [resolveClicked, setResolveClicked] = useState(false);
+  const [errorDetailId, seterrorDetailId] = useState('');
+  const [isResolved, setIsResolved] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showTable, setShowTable] = useState(false);
+  const [body, setBody] = useState([]);
+  const [databody, setDatabody] = useState([]);
+  const [selectedError, setSelectedError] = useState(null);
+  // const [Data, setData] = useState[null];
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = body.slice(indexOfFirstRecord, indexOfLastRecord);
-
-  const totalRecords = body.length;
+  const currentRecords = body.filter(item => item.errorDetailId).slice(indexOfFirstRecord, indexOfLastRecord);
+  console.log(databody);
+  const totalRecords = body.filter(item => item.errorDetailId).length;
   const totalPages = Math.ceil(totalRecords / recordsPerPage);
+
+  // const cobStartValue = useContext(TimerContext);
+  // localStorage.setItem('cobFlag', cobStartValue.cobFlag);
+  // const cobStatus = localStorage.getItem('cobFlag');
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    var companyId;
+    const handleResolveClick = async () => {
+      try {
+        const datesResponse = await fetch(`http://localhost:81/irf-provider-container/api/v1.1.0/reference/dates`);
+        console.log('Dates API Response status:', datesResponse.status);
+        const datesJsonData = await datesResponse.json();
+        companyId = datesJsonData.body[0].companyId;
+
+        console.log("currentdate" + companyId);
+        console.log("curDate" + companyId);
+        if (!datesResponse.ok) {
+          throw new Error('Failed to fetch dates');
+        } else {
+          console.log('Successfully fetched dates');
+        }
+      } catch (error) {
+        console.error('Error handling resolve click:', error);
+      }
+    };
+    const getEodData = async () => {
+      try {
+        const response = await fetch(`http://localhost:81/irf-miniproject-bonds/api/v1.0.0/party/ebeoderror/${companyId}`);
+        if (!response.ok) {
+          const errorMessge = 404;
+          console.log(errorMessge);
+          console.log(response.status);
+          if (errorMessge === response.status) {
+            setIsError(true);
+          } else {
+            setIsError(false);
+          }
+          throw new Error('Failed to fetch data');
+        }
+        const jsonData = await response.json();
+        setBody(jsonData.body);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    console.log("isis :" + isResolved);
+    getEodData();
+    handleResolveClick();
+    return () => {
+      setIsResolved(false);
+    };
+
+  }, [isResolved]);
+
+  
   const renderPageNumbers = () => {
     const pageNumbers = [];
+    // Adjust pagination based on total pages
     if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(
@@ -44,25 +98,10 @@ function EodErrorPage() {
         );
       }
     } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 5; i++) {
-          pageNumbers.push(
-            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
-              <button onClick={() => paginate(i)} className="page-link">
-                {i}
-              </button>
-            </li>
-          );
-        }
-        pageNumbers.push(<li key="ellipsis1" className="page-item">...</li>);
-        pageNumbers.push(
-          <li key={totalPages} className="page-item">
-            <button onClick={() => paginate(totalPages)} className="page-link">
-              {totalPages}
-            </button>
-          </li>
-        );
-      } else if (currentPage >= totalPages - 2) {
+      // Add ellipsis and handle showing pages based on current page
+      const startPage = Math.max(1, currentPage - 2);
+      const endPage = Math.min(totalPages, currentPage + 2);
+      if (currentPage > 1) {
         pageNumbers.push(
           <li key={1} className="page-item">
             <button onClick={() => paginate(1)} className="page-link">
@@ -70,35 +109,23 @@ function EodErrorPage() {
             </button>
           </li>
         );
-        pageNumbers.push(<li key="ellipsis2" className="page-item">...</li>);
-        for (let i = totalPages - 4; i <= totalPages; i++) {
-          pageNumbers.push(
-            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
-              <button onClick={() => paginate(i)} className="page-link">
-                {i}
-              </button>
-            </li>
-          );
+        if (currentPage > 2) {
+          pageNumbers.push(<li key="ellipsis-start" className="page-item">...</li>);
         }
-      } else {
+      }
+      for (let i = startPage; i <= endPage; i++) {
         pageNumbers.push(
-          <li key={1} className="page-item">
-            <button onClick={() => paginate(1)} className="page-link">
-              1
+          <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
+            <button onClick={() => paginate(i)} className="page-link">
+              {i}
             </button>
           </li>
         );
-        pageNumbers.push(<li key="ellipsis3" className="page-item">...</li>);
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          pageNumbers.push(
-            <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
-              <button onClick={() => paginate(i)} className="page-link">
-                {i}
-              </button>
-            </li>
-          );
+      }
+      if (currentPage < totalPages) {
+        if (currentPage < totalPages - 1) {
+          pageNumbers.push(<li key="ellipsis-end" className="page-item">...</li>);
         }
-        pageNumbers.push(<li key="ellipsis4" className="page-item">...</li>);
         pageNumbers.push(
           <li key={totalPages} className="page-item">
             <button onClick={() => paginate(totalPages)} className="page-link">
@@ -111,211 +138,180 @@ function EodErrorPage() {
     return pageNumbers;
   };
 
+  useEffect(() => {
+    var currentDate;
+    var dateTime = [];
+    const getDatetime = () => {
+      return fetch(`http://localhost:81/CobMonitor/api/v1.0.0/party/ebeoderror/${errorDetailId}`)
+        .then(response => {
+          console.log(response);
+          console.log('Response status:', response.status);
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          // const jsonData = await response.json();
+          // setData(response.json());
+          return response.json();
+        })
+        .then(jsonData => {
+          console.log('JSON Data:', jsonData);
+          dateTime = jsonData.body.fatalError.map((time) => ({
+            timeDate: time.dateTime,
+            dateResolved: currentDate
+          }));
+          console.log('printed Successfully datetime get');
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    };
+    const resolveError = async () => {
+      try {
+        const response = await fetch(`http://localhost:81/irf-provider-container/api/v2.0.2/system/companies/${errorDetailId}/errorMessages`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "body": {
+              fatalError: dateTime
+            }
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to edit the record');
+        }
+        console.log('Successfully edited the record');
+        //console.log("isisis :"+isResolved);
+      } catch (error) {
+        console.error('Error updating data:', error);
+      }
+    };
+
+
+    const handleResolveClick = async () => {
+      try {
+        const datesResponse = await fetch(`http://localhost:81/irf-provider-container/api/v1.1.0/reference/dates`);
+        console.log('Dates API Response status:', datesResponse.status);
+        const datesJsonData = await datesResponse.json();
+        currentDate = datesJsonData.body[0].currentWorkingDate;
+
+        console.log("currentdate" + currentDate);
+        console.log("curDate" + currentDate);
+        if (!datesResponse.ok) {
+          throw new Error('Failed to fetch dates');
+        } else {
+          console.log('Successfully fetched dates');
+        }
+        await getDatetime();
+        await resolveError();
+        setIsResolved(true);
+
+      } catch (error) {
+        console.error('Error handling resolve click:', error);
+      }
+    }
+    if (resolveClicked) {
+      handleResolveClick();
+      setResolveClicked(false);
+    }
+  }, [resolveClicked, errorDetailId]);
+
+  const handleClick = (errorDetailId) => {
+    const date = errorDetailId;
+    seterrorDetailId(date);
+    setShowPopup(true);
+  };
+
+  const handleOkClick = async () => {
+    setShowPopup(false);
+    setResolveClicked(true);
+  };
+
+  // useEffect(() => {
+  //   const countErrorDetailIds = (Data) => {
+  //     let count = 0;
+  //     Data.body.forEach(entry => {
+  //         if (entry.errorDetailId) {
+  //             count++;
+  //         }
+  //     });
+  //   }
+  //   countErrorDetailIds();
+  //   const intervalId = setInterval(countErrorDetailIds, 1000);
+  //     return () => clearInterval(intervalId);
+  // }, [cobStatus,Data]);
+
+  const handleSearch = (id) => {
+    setSelectedError(id);
+    setShowTable(true);
+  };
+
+  const handleItemClick = () => {
+    setShowTable(false);
+};
+
   return (
-    
-      
-      <div class="Containernew">
-        <div class="options grid justify-items-center">
-          <h2>EB.EOD.ERROR</h2>
-        </div>
-        <table class=" table ">
-          <thead>
+    <div className="Containernew w-100">
+      <div className="options grid justify-items-center">
+        <h2>EB.EOD.ERROR</h2>
+      </div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>BussinessClosureDate</th>
+            <th>Time Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody >
+          {isError ? (
             <tr>
-              <th>ID</th>
-              <th>Application</th>
-              <th>Description</th>
-              <th>Time Date</th>
-              <th>Fix Required</th>
-              <th></th>
+              <td colSpan="5">There is no error data to display.</td>
             </tr>
-          </thead>
-          <tbody>
-          {currentRecords.map((item, index) => (
+          ) : (
+            currentRecords.map((item, index) => (
               <tr key={index}>
+                <td><FontAwesomeIcon icon={faSearch} className="search-icon" onClick={() => handleSearch(item.errorDetailId)} /></td>
                 <td>{item.errorDetailId}</td>
-                <td>{item.applicationId}</td>
-                <td>{item.errorMessage}</td>
+                <td>{item.businessClosureDate}</td>
                 <td>{item.dateTime}</td>
-                <td style={{ color: item.dateResolved ? 'red' : 'green' }}>
-                  {item.dateResolved ? 'NO' : 'YES'}
-                </td>
                 <td>
-                  {item.dateResolved ? (
-                    <span className=" bg-green-500 text-black">RESOLVED</span>
-                  ) : (
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">RESOLVE</button>
-                  )}
+                  <button
+                    type="submit"
+                    onClick={() => handleClick(item.errorDetailId)}
+                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Resolve</button>
+                  <div className="w-100">
+                    {showPopup && (
+                      <div className="popup">
+                        <p>Before proceeding, Make sure you resolved this error ? </p>
+                        <button onClick={handleOkClick}>OK</button>
+                        <button onClick={() => setShowPopup(false)}>Cancel</button>
+                      </div>
+                    )}
+                  </div>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <nav>
-        <ul className="pagination">
-            {renderPageNumbers()}
+            ))
+            )}
+        </tbody>
+      </table>
+      <nav>
+        {isError ? (<p></p>) : (
+          <ul className="pagination">
+           <button>{renderPageNumbers()}</button> 
           </ul>
-        </nav>
-      </div>
+        )}
+      </nav>
+      {showTable && <EodPopup errorDetailId={selectedError} handleOkClick={handleItemClick} />}
+    </div>
+
   );
+
 }
 
-
-
-
-
-var body=[
-  {
-    "dateTime": "13:15:29 01 MAR 2024",
-    "errorDetailId": "MY0010001.20240304",
-    "companyId": "MY0010001",
-    "dateResolved": "2024-03-01T00:00:00.000Z",
-    "errorMessage": "Runtime Exception IndexOutOfBoundsException Index: 0, Size: 0",
-    "isFixRequired": "YES",
-    "detailKey": "205156025498929.00",
-    "applicationId": "BNK/KDB.FT.ATM.TRANS.REF-KDB.FT.ATM.TRANS.REF",
-    "businessClosureDate": "2024-03-04"
-},
-{
-    "dateTime": "13:01:52 08 MAR 2024",
-    "errorDetailId": "MY0010001.20240308",
-    "companyId": "MY0010001",
-    "errorMessage": "EB.RTN.DATE2024031",
-    "isFixRequired": "YES",
-    "detailKey": "205226292902912.00",
-    "applicationId": "SYSTEM.END.OF.DAY1-STO.BALANCES.EOD",
-    "businessClosureDate": "2024-03-08"
-},
-{
-    "dateTime": "13:00:57 15 MAR 2024",
-    "errorDetailId": "MY0010001.20240315",
-    "companyId": "MY0010001",
-    "dateResolved": "2024-03-18T00:00:00.000Z",
-    "errorMessage": "EB.RTN.DATE2024031",
-    "isFixRequired": "NO",
-    "detailKey": "205295153507657.00",
-    "applicationId": "SYSTEM.END.OF.DAY1-STO.BALANCES.EOD",
-    "businessClosureDate": "2024-03-15"
-},
-{
-    "dateTime": "08:38:22 20 MAR 2024",
-    "errorDetailId": "MY0010001.20240319",
-    "companyId": "MY0010001",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205341893223902.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY",
-    "businessClosureDate": "2024-03-19"
-},
-{
-    "dateTime": "08:38:25 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "NO",
-    "detailKey": "205348980523905.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:38:29 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "NO",
-    "detailKey": "205344657723909.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:38:47 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "NO",
-    "detailKey": "205340560023927.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:39:02 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205342883523942.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:39:45 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205342317123985.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:41 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205342082324041.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:42 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205345386524042.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:47 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205349424024047.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:49 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205343721124049.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:54 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205347512924054.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "08:40:57 20 MAR 2024",
-    "dateResolved": "2024-03-20T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205340332624057.00",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY"
-},
-{
-    "dateTime": "06:40:14 21 MAR 2024",
-    "errorDetailId": "MY0010001.20240320",
-    "companyId": "MY0010001",
-    "dateResolved": "2024-03-21T00:00:00.000Z",
-    "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-    "isFixRequired": "YES",
-    "detailKey": "205350533203214.01",
-    "applicationId": "FT.START.OF.DAY-FT.STO.PAY",
-    "businessClosureDate": "2024-03-20"
-},{
-  "dateTime": "07:40:15 23 MAR 2024",
-  "errorDetailId": "MY0010005.20240320",
-  "companyId": "MY0010005",
-  "dateResolved": "2024-03-21T00:00:00.000Z",
-  "errorMessage": "NO FILE.CONTROL RECORD - FOREX - F.FOREX , MNEMONIC =  , IN.PARAMETER = F.FOREX , COMPANY = MY0010001 , CALL.ROUTINE = F.READ,FX.GET.UTILISATION.RATE,PAYMENT.ORDER.AUTHORISE",
-  "isFixRequired": "NO",
-  "detailKey": "205350533203214.01",
-  "applicationId": "FT.START.OF.DAY-FT.STO.PAY",
-  "businessClosureDate": "2024-03-20"
-}
-]
-  
 
 export default EodErrorPage;

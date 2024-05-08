@@ -1,0 +1,21 @@
+@import "./public/globalStyle.scss";
+.parentDiv {
+    box-shadow: 0px 0.3px 7px 2px $primary-shadow-color;
+    // border: 1px solid $primary-shadow-color;
+    font-size: $font-size;
+    margin-left: 4px !important;
+    .cobProgressChart {
+       
+        text-align: left;
+        .header2 {
+            color: $primary-color;
+            padding: 0.5rem;
+            font-size: $header-font-size !important;
+            font-weight: 600;
+        }
+       
+    }
+}
+.recharts-legend-item {
+    display: none !important;
+}

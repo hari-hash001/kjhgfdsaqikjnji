@@ -1,0 +1,30 @@
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 10000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .popup p {
+    margin-bottom: 10px;
+  }
+ 
+  .popup button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+ 
+  .popup button:hover {
+    background-color: #0056b3;
+  }

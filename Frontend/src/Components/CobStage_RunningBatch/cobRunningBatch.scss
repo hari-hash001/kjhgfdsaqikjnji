@@ -1,0 +1,29 @@
+@import "./public/globalStyle.scss";
+.cobRunningBatch {
+  // border: 1px solid $primary-shadow-color;
+  box-shadow: 0px 0.3px 7px 2px $primary-shadow-color;
+    // padding: 1rem;
+    width: 100%;
+    min-height: 16.7rem;
+    max-height: 16.7rem;
+    font-size: $font-size;
+    overflow-y: auto;
+    .cob-running-batch-table {
+        width: 100%;
+        white-space: nowrap;
+      }
+      .header {
+        color: $primary-color;
+            padding: 0.5rem;
+            font-size: $header-font-size !important;
+            font-weight: 600;
+            margin: 0 !important;
+      }
+     
+  }
+ 
+   
+  .cobRunningBatch .cob-running-batch-table .rdt_TableCol {
+    max-width: none !important;
+  }
+ 

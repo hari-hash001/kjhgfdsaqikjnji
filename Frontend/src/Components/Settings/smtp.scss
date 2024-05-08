@@ -1,0 +1,113 @@
+@import "./public/globalStyle.scss";
+.smtp-container {
+    position: fixed;
+    padding: 1rem;
+    border: 1px solid #000000;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25rem;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(4, 4, 4, 0.3);
+    z-index: 10000;
+    background-color: white;
+    .head{
+      font-size: 22px;
+      font-weight: 500;
+      color: $primary-color;
+      border-bottom: 1px solid $primary-color;
+      padding-bottom: 3px;
+  }
+ 
+  .input-container{
+      display: flex;
+      justify-content: space-between;
+      .label{
+          font-size: 14px;
+          font-weight:600;
+          .required-field {
+              color: red;
+          }
+      }
+      .input{
+          input {
+              border: 1px solid $primary-color;
+              height: 2rem;
+              width: 16rem;
+              &:focus {
+                  outline-color: $primary-color; // Change outline color to blue when in focus
+                }
+          }
+         
+      }
+  }
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    .close-btn{
+        background-color: transparent;
+        color: black;
+        border: 1px solid $primary-color;
+        &:hover{
+            background-color: black;
+            color: white;
+        }
+    }
+    .submit{
+        background-color: $primary-color;
+        color: $white-color;
+        // padding: 0px 20px 0px 20px;
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+}
+   
+  }
+  .edit-btn{
+    border-radius: 3px;
+    background-color: black !important;
+    color: white !important;
+ 
+    &:disabled{
+       opacity: 0.5;
+       cursor: not-allowed !important;
+    }
+  }
+  .popup{
+    border: 2px solid $primary-color;
+    padding: 20px;
+    background-color: $white-color;
+    position: absolute;
+    z-index: 100000;
+    top: 11rem;
+    left: 29rem;
+    .input-container{
+        input{
+            border: 1px solid $primary-color;
+            height: 2rem;
+            width: 16rem;
+            &:focus {
+                outline-color: $primary-color;
+              }
+        }
+    }
+    .buttons{
+        .clse-btn{
+            background-color: $white-color;
+            color: black;
+            border: 1px solid black;
+        }
+        .ok-btn{
+            color: white;
+            background-color: $primary-color;
+        }
+    }
+  }
+  .blurred {
+    cursor: not-allowed;
+    filter: blur(3px);
+  }

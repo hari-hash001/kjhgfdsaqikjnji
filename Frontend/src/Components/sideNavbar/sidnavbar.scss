@@ -1,15 +1,66 @@
+@import "./public/globalStyle.scss";
+// .side-navbar {
+//   margin-top: 14px;
+//   font-family: $font-family;
+//   box-shadow: 0px 0.5px 10px 2px $primary-shadow-color;
+//   width: 190px;
+//   height: 100vh;
+//   background-color: $white-color;
+//   color: $primary-color;
+//   overflow-x: hidden;
+//   position: fixed;
+//   left: -140px;
+//   z-index: 1000000;
+//   transition: left 0.5s ease;
+//   &:hover{
+//     left: 0px;
+//   }
 
-  .transition-transform {
-    transition: transform 0.3s ease-in-out;
+// }
+
+
+.content{
+  padding: 0 !important;
+  ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    padding-left: 0;
+      a{
+      //   font-size: 16px;
+      //   font-weight: 600;
+      //   color: $primary-color;
+      //   text-decoration: none;
+      //   display: flex;
+      //   align-items: center;
+        // padding : 15px 10px 15px 20px;
+        // justify-content: space-between;
+        //  gap: 2rem;
+      // }
+      // &:hover{
+      //   cursor: pointer;
+      //   background-color: #e1e1e1;
+      // }
+      // svg{
+        
+      //   height: 1.5rem;
+      //   width: 1.5rem;
+      // }
+      
+    }
   }
-  
-  // Define the position when the sidebar is closed
-  .-translate-x-full {
-    transform: translateX(-100%);
-  }
-  svg{
-    color: #4A0575;
-  }
-  .navi{
-    max-width: 40px;
-  }
+}
+
+// a.active {
+//   background-color: $primary-shadow-color !important;
+//   padding: 10px;
+//   svg{
+//     color: white;
+//   }
+// }
+
+
+.side-navbar .content {
+  padding: 10px;
+}

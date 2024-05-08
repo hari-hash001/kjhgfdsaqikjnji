@@ -1,124 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import './sidnavbar.scss';
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+const SideNavBar = () => {
 
   return (
-    <div className="navi ">
-      <nav>
-        <ul class="grid gap-6 top-3.5 left-2.5  bg-white px-4  pt-8 ">
-          <li>
-          <button
-        type="button"
-        onClick={toggleSidebar}
-        className={` ${isOpen ? 'hidden' : 'block'}`}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>       
-        <span className="sr-only">Open menu</span>
-      </button>
-          </li>
-          <li>
-          <button
-        type="button"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
-            </svg>      
-        <span className="sr-only">Dashboard</span>
-      </button>
-          </li>
-          <li>
-          <button
-        type="button"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-            </svg>  
-        <span className="sr-only">Mail param</span>
-      </button>
-          </li>
-          <li>
-          <button
-        type="button"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
-            </svg>      
-        <span className="sr-only">EB.EOD.ERROR</span>
-      </button>
-          </li>
+    <div className="sidenavigation">
+      <div className="side-navbar">
+      <div className="content">
+        <ul className="pt-3">
+       
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active-link" 
+                className="logo"
+              >
+                Dashboard
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.4697 3.84099C11.7626 3.5481 12.2374 3.5481 12.5303 3.84099L21.2197 12.5303C21.5126 12.8232 21.9874 12.8232 22.2803 12.5303C22.5732 12.2374 22.5732 11.7626 22.2803 11.4697L13.591 2.78033C12.7123 1.90165 11.2877 1.90165 10.409 2.78033L1.71967 11.4697C1.42678 11.7626 1.42678 12.2374 1.71967 12.5303C2.01256 12.8232 2.48744 12.8232 2.78033 12.5303L11.4697 3.84099Z" fill="#4A0575"/>
+          <path d="M12 5.43198L20.159 13.591C20.1887 13.6207 20.2191 13.6494 20.25 13.6771V19.875C20.25 20.9105 19.4105 21.75 18.375 21.75H15C14.5858 21.75 14.25 21.4142 14.25 21V16.5C14.25 16.0858 13.9142 15.75 13.5 15.75H10.5C10.0858 15.75 9.75 16.0858 9.75 16.5V21C9.75 21.4142 9.41421 21.75 9 21.75H5.625C4.58947 21.75 3.75 20.9105 3.75 19.875V13.6771C3.78093 13.6494 3.81127 13.6207 3.84099 13.591L12 5.43198Z" fill="#4A0575"/>
+          </svg>
+              </NavLink>
+              <NavLink
+                exact
+                to="/EbEodError"
+                activeClassName="active-link" 
+                className="logo"
+              >
+                EB.EOD.ERROR
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 5.625C1.5 4.58947 2.33947 3.75 3.375 3.75H20.625C21.6605 3.75 22.5 4.58947 22.5 5.625V18.375C22.5 19.4105 21.6605 20.25 20.625 20.25H3.375C2.33947 20.25 1.5 19.4105 1.5 18.375V5.625ZM21 9.375C21 9.16789 20.8321 9 20.625 9H13.125C12.9179 9 12.75 9.16789 12.75 9.375V10.875C12.75 11.0821 12.9179 11.25 13.125 11.25H20.625C20.8321 11.25 21 11.0821 21 10.875V9.375ZM21 13.125C21 12.9179 20.8321 12.75 20.625 12.75H13.125C12.9179 12.75 12.75 12.9179 12.75 13.125V14.625C12.75 14.8321 12.9179 15 13.125 15H20.625C20.8321 15 21 14.8321 21 14.625V13.125ZM21 16.875C21 16.6679 20.8321 16.5 20.625 16.5H13.125C12.9179 16.5 12.75 16.6679 12.75 16.875V18.375C12.75 18.5821 12.9179 18.75 13.125 18.75H20.625C20.8321 18.75 21 18.5821 21 18.375V16.875ZM10.875 18.75C11.0821 18.75 11.25 18.5821 11.25 18.375V16.875C11.25 16.6679 11.0821 16.5 10.875 16.5H3.375C3.16789 16.5 3 16.6679 3 16.875V18.375C3 18.5821 3.16789 18.75 3.375 18.75H10.875ZM3.375 15H10.875C11.0821 15 11.25 14.8321 11.25 14.625V13.125C11.25 12.9179 11.0821 12.75 10.875 12.75H3.375C3.16789 12.75 3 12.9179 3 13.125V14.625C3 14.8321 3.16789 15 3.375 15ZM3.375 11.25H10.875C11.0821 11.25 11.25 11.0821 11.25 10.875V9.375C11.25 9.16789 11.0821 9 10.875 9H3.375C3.16789 9 3 9.16789 3 9.375V10.875C3 11.0821 3.16789 11.25 3.375 11.25Z" fill="#4A0575"/>
+                </svg>
+              </NavLink>
+              
+            
+              <NavLink
+                exact
+                to="/MailParam"
+                activeClassName="active-link"
+                className="logo"
+              >
+                Mail Param
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 8.6691V17.25C1.5 18.9069 2.84315 20.25 4.5 20.25H19.5C21.1569 20.25 22.5 18.9069 22.5 17.25V8.6691L13.5723 14.1631C12.6081 14.7564 11.3919 14.7564 10.4277 14.1631L1.5 8.6691Z" fill="#4A0575"/>
+          <path d="M22.5 6.90783V6.75C22.5 5.09315 21.1569 3.75 19.5 3.75H4.5C2.84315 3.75 1.5 5.09315 1.5 6.75V6.90783L11.2139 12.8856C11.696 13.1823 12.304 13.1823 12.7861 12.8856L22.5 6.90783Z" fill="#4A0575"/>
+          </svg>
+              </NavLink>
+            
         </ul>
-      </nav>
-
-      <div
-        id="drawer-navigation"
-        className={`fixed top-0 left-0 z-40 w-60 h-screen p-4 overflow-y-auto transition-transform ${
-          isOpen ? '' : '-translate-x-full'
-        } bg-white dark:bg-gray-800`}
-        tabIndex="-1"
-        aria-labelledby="drawer-navigation-label"
-      >
-        <div className="option grid justify-items-end">
-          {/* Close button */}
-          <button
-            type="button"
-            onClick={toggleSidebar}
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close menu</span>
-          </button>
-        </div>
-        <div class="menus py-4 overflow-y-auto">
-          <ul class="space-y-4 pt-4 font-medium">
-          <li >
-            <a href="#" class="flex  space-x-2 items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
-            </svg>
-               <span class="ms-3">Dashboard</span>
-            </a>
-         </li>
-         <li>
-            <a href="#" class="flex space-x-2 items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-            </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Mail param</span>
-            </a>
-         </li>
-         <li>
-            <a href="#" class="flex space-x-2 items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"> 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
-            </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">EB.EOD.ERROR</span>
-            </a>
-         </li>
-          </ul>
-        </div>
       </div>
     </div>
+    </div>
+    
   );
-}
+};
 
-export default Sidebar;
+export default SideNavBar;

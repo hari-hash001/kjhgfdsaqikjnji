@@ -92,31 +92,3 @@ overflow-x: hidden !important;
 
 
 
-.cobRunningBatch {
-  padding: 1rem;
-  border: 0.12rem solid blueviolet;
-  border-radius: 1rem;
-  width: 50%;
-  max-height: 100vh; /* Maximum height for the component */
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
-  margin-left: 1rem; /* Adjust margin as needed */
-  margin-top: 2rem;
-}
-
-.cobRunningBatch .cob-running-batch-table {
-  white-space: nowrap; /* Prevent text wrapping in table cells */
-}
-
-.cobRunningBatch .cob-running-batch-table .rdt_TableCol {
-  max-width: none !important; /* Override max-width for table columns */
-}
-
-.header {
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.barchart {
-  margin-top: 1rem;
-}

@@ -5,8 +5,8 @@
 
 .Containernew{
     font-family: $font-family;
-  background-color: #F5EEF9;
-  padding: 20px;
+  background-color: $white-color;
+   padding: 30px;
   gap: 20px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
     }
   }
   .table{
-    max-width: 70%;
+    max-width: 80%;
     margin-left: 0;
     background-color: #FFFFFF;
     color: black;
@@ -42,14 +42,16 @@
       ul{
         display: flex;
         gap: 20px;
-        button{
-          background-color: #4A0575;
-          color: white;
-          padding: 10px;
-        }
+        // border: 0 !important;
+        
       }
     }
 }
 
 
+
+.search-icon {
+  margin-right: 5px; 
+  cursor: pointer;
+}
 

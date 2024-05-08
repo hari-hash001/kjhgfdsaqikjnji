@@ -1,0 +1,70 @@
+@import "./public/globalStyle.scss";
+.node-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border: 1px solid #000000;
+    width: 25rem;
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(4, 4, 4, 0.3);
+    background-color: #ffffff;
+    z-index: 10000;
+    .head{
+      font-size: 22px;
+      font-weight: 500;
+      color: $primary-color;
+      border-bottom: 1px solid $primary-color;
+      padding-bottom: 3px;
+  }
+ 
+  .input-container{
+      display: flex;
+      justify-content: space-between;
+      .label{
+          font-size: 14px;
+          font-weight:600;
+          .required-field {
+              color: red;
+          }
+      }
+      .input{
+          input {
+              border: 1px solid $primary-color;
+              height: 2rem;
+              width: 16rem;
+              &:focus {
+                  outline-color: $primary-color; // Change outline color to blue when in focus
+                }
+          }
+         
+      }
+  }
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    .close-btn{
+        background-color: transparent;
+        color: black;
+        border: 1px solid $primary-color;
+        &:hover{
+            background-color: black;
+            color: white;
+        }
+    }
+    .submit{
+        background-color: $primary-color;
+        color: $white-color;
+        // padding: 0px 20px 0px 20px;
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+}
+  }
